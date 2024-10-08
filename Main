@@ -1,0 +1,53 @@
+import java.util.*;
+
+class Books {
+    String[][][] array = new String[2][1][2]; // 5 books, 2 categories, 3 details each
+
+    public void books_det() {
+        Scanner sc = new Scanner(System.in);
+
+        for (int i = 0; i < 2; i++) {
+            System.out.print("Enter book name : ");
+            String name = sc.next();
+            array[i][0][0] = name;
+            for (int n = 0; n < 1; n++) { // Loop to store two names
+                System.out.print("Is the book "+ name +" available (true/false) for issue? ");
+                boolean ava_cond = sc.nextBoolean();
+                array[i][n][1] = ava_cond ? "available" : "not available";
+
+                if (!ava_cond) {
+                    System.out.print("Enter day of issuing");
+                    for (int k = 0; k < 2; k++) {
+                        String details = sc.next();
+                        System.out.print("Enter  day of return ");
+                        array[i][n][k] = details;
+                    }
+                } else {
+                    array[i][n][1] = "No additional details";
+                }
+            }
+        }
+    }
+
+    public void show_books() {
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Book " + (i + 1) + ":");
+            for (int n = 0; n < 1; n++) {
+                System.out.println("  Name: " + array[i][n][0]);
+                System.out.println("  Availability: " + array[i][n][1]);
+                for (int k = 0; k < 2; k++) {
+                    System.out.println("  Detail " + (k - 1) + ": " + array[i][n][k]);
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Books obe = new Books();
+        obe.books_det();
+        obe.show_books();
+    }
+}
